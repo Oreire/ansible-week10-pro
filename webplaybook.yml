@@ -5,25 +5,25 @@
   gather_facts: yes
   
   tasks:
-    - name: Update all packages on RedHat-based systems
+    - name: Update all packages on Amazon Linux
       yum:
         name: '*'
         state: latest
       when: ansible_facts ['distribution'] in ['Amazon', 'Redhat']
             
-    - name: Update all packages on Debian-based systems
+    - name: Update all packages on Ubuntu Linux 
       apt:
         update_cache: yes
         upgrade: dist
       when: ansible_facts ['distribution'] in ['Ubuntu', 'Debian']
 
-    - name: Ensure Nginx is installed on RedHat-based systems
+    - name: Install Nginx on Amazon Linux  
       yum:
         name: nginx
         state: present
       when: ansible_facts ['distribution'] in ['Amazon', 'Redhat']
 
-    - name: Ensure Nginx is installed on Debian-based systems
+    - name: Install Nginx on Ubuntu Linux 
       apt:
         name: nginx
         state: present
