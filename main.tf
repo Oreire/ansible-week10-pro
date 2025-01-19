@@ -50,33 +50,53 @@ resource "aws_security_group" "inventory_sg" {
 }
 
 # Create AWS EC2 Instance (Web Servers)
-resource "aws_instance" "web_nodes" {
-  count                  = 2
+resource "aws_instance" "web_node1" {
   ami                    = "ami-0c76bd4bd302b30ec"
   instance_type          = "t2.micro"
   key_name               = "Ans-Auth"
   vpc_security_group_ids = [aws_security_group.inventory_sg.id]
   tags = {
-    Name         = "Web-Node-${count.index + 1}"
+    Name         = "Web-Node-Amazon"
     Time-Created = formatdate("MM DD YYYY hh:mm ZZZ", timestamp())
-    Department   = "DevOps"
+    Department   = "DevOps Masterclass"
   }
 }
 
+resource "aws_instance" "web_node2" {
+  ami                    = "ami-091f18e98bc129c4e"
+  instance_type          = "t2.micro"
+  key_name               = "Ans-Auth"
+  vpc_security_group_ids = [aws_security_group.inventory_sg.id]
+  tags = {
+    Name         = "Web-Node-Ubuntu"
+    Time-Created = formatdate("MM DD YYYY hh:mm ZZZ", timestamp())
+    Department   = "DevOps Masterclass"
+  }
+}
 # Create AWS EC2 Instance (App Servers)
-resource "aws_instance" "app_nodes" {
-  count                  = 2
+resource "aws_instance" "app_node1" {
   ami                    = "ami-0c76bd4bd302b30ec"
   instance_type          = "t2.micro"
   key_name               = "Ans-Auth"
   vpc_security_group_ids = [aws_security_group.inventory_sg.id]
   tags = {
-    Name         = "App-Node-${count.index + 1}"
+    Name         = "App-Node-Amazon"
     Time-Created = formatdate("MM DD YYYY hh:mm ZZZ", timestamp())
-    Department   = "DevOps"
+    Department   = "DevOps Mastaerclass"
   }
 }
 
+resource "aws_instance" "app_node2" {
+  ami                    = "ami-091f18e98bc129c4e"
+  instance_type          = "t2.micro"
+  key_name               = "Ans-Auth"
+  vpc_security_group_ids = [aws_security_group.inventory_sg.id]
+  tags = {
+    Name         = "App-Node-Ubuntu"
+    Time-Created = formatdate("MM DD YYYY hh:mm ZZZ", timestamp())
+    Department   = "DevOps Masterclass"
+  }
+}
 # Create Ansible Control Node
 resource "aws_instance" "control_node" {
   ami           = "ami-0c76bd4bd302b30ec"
