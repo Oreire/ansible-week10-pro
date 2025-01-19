@@ -64,14 +64,14 @@ resource "aws_instance" "web_nodes" {
 }
 
 # Create AWS EC2 Instance (App Servers)
-resource "aws_instance" "java_nodes" {
+resource "aws_instance" "app_nodes" {
   count                  = 2
   ami                    = "ami-0c76bd4bd302b30ec"
   instance_type          = "t2.micro"
   key_name               = "Ans-Auth"
   vpc_security_group_ids = [aws_security_group.inventory_sg.id]
   tags = {
-    Name         = "Java-Node-${count.index + 1}"
+    Name         = "App-Node-${count.index + 1}"
     Time-Created = formatdate("MM DD YYYY hh:mm ZZZ", timestamp())
     Department   = "DevOps"
   }
@@ -82,6 +82,7 @@ resource "aws_instance" "control_node" {
   ami           = "ami-0c76bd4bd302b30ec"
   instance_type = "t2.micro"
   key_name      = "SSH-KEY"
+  vpc_security_group_ids = [aws_security_group.inventory_sg.id]
   tags = {
     Name = "ANSIBLE-CONTROL-NODE"
   }
