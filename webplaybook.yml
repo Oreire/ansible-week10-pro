@@ -29,8 +29,9 @@
         state: present
       when: ansible_facts ['distribution'] in ['Ubuntu', 'Debian']
 
-    - name: Start and enable Nginx service
+    - name: Start and enable Nginx service (Manage Nginx Service)
       service:
         name: nginx
         state: started
         enabled: yes
+    
