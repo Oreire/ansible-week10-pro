@@ -98,13 +98,13 @@ resource "aws_instance" "app_node2" {
   }
 }
 # Create Ansible Control Node
-resource "aws_instance" "control_node" {
+resource "aws_instance" "ansible_control_node" {
   ami           = "ami-0c76bd4bd302b30ec"
   instance_type = "t2.micro"
   key_name      = "SSH-KEY"
   vpc_security_group_ids = [aws_security_group.inventory_sg.id]
   tags = {
-    Name = "ANSIBLE-CONTROL-NODE"
+    Name = "AnsibleControlNode"
   }
 }
 
